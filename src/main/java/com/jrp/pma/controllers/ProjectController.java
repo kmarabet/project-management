@@ -56,7 +56,7 @@ public class ProjectController {
 //        }
 
         //use a redirect to prevent duplicate submissions
-        return "redirect:/projects/new";
+        return "redirect:/projects";
     }
 
     @RequestMapping
