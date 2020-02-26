@@ -3,6 +3,7 @@ package com.jrp.pma.controllers;
 
 import com.jrp.pma.dao.EmployeeRepository;
 import com.jrp.pma.dao.ProjectRepository;
+import com.jrp.pma.dto.EmployeeProject;
 import com.jrp.pma.entities.Employee;
 import com.jrp.pma.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class HomeController {
         List<Project> projects = proRepo.findAll();
         model.addAttribute("projects", projects);
 
-        List<Employee> employees = (List<Employee>)emplRepo.findAll();
-        model.addAttribute("employees", employees);
+//        List<Employee> employees = emplRepo.findAll();
+//        model.addAttribute("employees", employees);
+        List<EmployeeProject> employeesProjectCnt = emplRepo.employeeProjects();
+        model.addAttribute("employeesListProjectsCnt", employeesProjectCnt);
 
         return "main/home";
     }
