@@ -1,13 +1,12 @@
 package com.jrp.pma.controllers;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jrp.pma.dao.EmployeeRepository;
-import com.jrp.pma.dao.ProjectRepository;
 import com.jrp.pma.dto.ChartData;
 import com.jrp.pma.dto.EmployeeProject;
 import com.jrp.pma.entities.Project;
+import com.jrp.pma.services.EmployeeService;
+import com.jrp.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,9 @@ public class HomeController {
     private String var;
 
     @Autowired
-    ProjectRepository proRepo;
+    ProjectService proService;
     @Autowired
-    EmployeeRepository emplRepo;
+    EmployeeService empService;
 
     @GetMapping("/")
     public String displayHome(Model model) throws JsonProcessingException {
@@ -35,10 +34,10 @@ public class HomeController {
 
         Map<String, Object> map = new HashMap<>();
 
-        List<Project> projects = proRepo.findAll();
+        List<Project> projects = proService.getAll();
         model.addAttribute("projects", projects);
 
-        List<ChartData> projectData = proRepo.projectStatus();
+        List<ChartData> projectData = proService.getProjectStatus();
 
         // Lets convert projectData into a json structure for use in javascript
         ObjectMapper objectMapper = new ObjectMapper();
@@ -49,7 +48,7 @@ public class HomeController {
 
 //        List<Employee> employees = emplRepo.findAll();
 //        model.addAttribute("employees", employees);
-        List<EmployeeProject> employeesProjectCnt = emplRepo.employeeProjects();
+        List<EmployeeProject> employeesProjectCnt = empService.employeeProjects();
         model.addAttribute("employeesListProjectsCnt", employeesProjectCnt);
 
         return "main/home";
