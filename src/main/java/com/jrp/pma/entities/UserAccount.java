@@ -19,7 +19,9 @@ public class UserAccount {
 
     private boolean enabled;
 
-    public UserAccount(){}
+    public UserAccount(){
+        enabled = true;
+    }
 
     public long getUserId() {
         return userId;
