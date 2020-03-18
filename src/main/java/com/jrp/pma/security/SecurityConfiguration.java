@@ -60,8 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()/*.loginPage("/login-page")*/;
 
-        //Make the /h2-console to work, NOT USE IN PRODUCTION
-//        http.csrf().disable();
+        //Make the /h2-console to work, NOT USE IN PRODUCTION and Also allow POST, PUT, PATCH, DELETE (not safe) requests
+        http.csrf().disable();
 //        http.headers().frameOptions().disable();
     }
 }
