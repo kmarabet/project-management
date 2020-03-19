@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/app-api/employees")
@@ -41,13 +42,13 @@ public class EmployeeApiController {
 
     @PutMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Employee update(@RequestBody Employee employee){
+    public Employee update(@RequestBody @Valid Employee employee){
         return empRepo.save(employee);
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Employee partialUpdate(@PathVariable("id") Long id, @RequestBody Employee patchEmployee){
+    public Employee partialUpdate(@PathVariable("id") Long id, @RequestBody @Valid Employee patchEmployee){
         Employee emp = empRepo.findById(id).get();
 
         if (patchEmployee.getEmail() != null){
