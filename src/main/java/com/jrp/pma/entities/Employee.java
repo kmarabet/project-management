@@ -1,6 +1,7 @@
 package com.jrp.pma.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jrp.pma.validators.UniqueValue;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,7 @@ public class Employee {
     private String lastName;
     @NotNull
     @Email
-    @Column(unique = true)
+    @UniqueValue//@Column(unique = true)
     private String email;
 
 //  @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST}, fetch = FetchType.LAZY)
